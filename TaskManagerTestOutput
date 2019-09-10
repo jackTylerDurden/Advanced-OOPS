@@ -1,0 +1,202 @@
+JUnit version 4.13-beta-3
+..
+
+
+
+
+
+
+
+
+
+
+
+
+
+Before Sorting
+Process ID -> 62
+Process Name -> WINE(WINE is not an emulator)
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 12.1
+
+
+Process ID -> 21
+Process Name -> Adobe
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 12.1
+
+
+Process ID -> 2
+Process Name -> Nautilus
+Process Owner -> tanmay_linux
+No. Of Threads -> 5
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 12
+Process Name -> Gparted
+Process Owner -> tanmay_linux
+No. Of Threads -> 7
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 12.1
+
+
+Process ID -> 32
+Process Name -> ActiveDirectory
+Process Owner -> tanmay_linux
+No. Of Threads -> 8
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 42
+Process Name -> Chrome
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 98
+Process Name -> Firefox
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 98
+Process Name -> Firefox
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 12.1
+
+
+Process ID -> 52
+Process Name -> SublimeText
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 24
+Process Name -> VScode
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 28
+Process Name -> Ubuntu Software Center
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Sorted------------>>>
+Process ID -> 2
+Process Name -> Nautilus
+Process Owner -> tanmay_linux
+No. Of Threads -> 5
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 12
+Process Name -> Gparted
+Process Owner -> tanmay_linux
+No. Of Threads -> 7
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 12.1
+
+
+Process ID -> 21
+Process Name -> Adobe
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 12.1
+
+
+Process ID -> 24
+Process Name -> VScode
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 28
+Process Name -> Ubuntu Software Center
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 32
+Process Name -> ActiveDirectory
+Process Owner -> tanmay_linux
+No. Of Threads -> 8
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 42
+Process Name -> Chrome
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 52
+Process Name -> SublimeText
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 62
+Process Name -> WINE(WINE is not an emulator)
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 12.1
+
+
+Process ID -> 98
+Process Name -> Firefox
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 0.0
+
+
+Process ID -> 98
+Process Name -> Firefox
+Process Owner -> tanmay_linux
+No. Of Threads -> 4
+Percent Of CPU currently used -> 10.1
+Total CPU Time Used -> 12.1
+
+
+.
+
+
+
+
+Time: 0.062
+
+OK (3 tests)
+
