@@ -1,3 +1,9 @@
+/*
+    Name : Tanmay Deshpande
+    REDID : 824646024
+    Subject : Advanced Object Oriented Design and Programming
+    Assignment 1
+*/
 import java.util.Scanner;
 public class TaskManager{
     static int processQueueCapacity = 2; //default capacity of task manager is set to 2.

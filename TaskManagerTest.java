@@ -1,3 +1,9 @@
+/*
+    Name : Tanmay Deshpande
+    REDID : 824646024
+    Subject : Advanced Object Oriented Design and Programming
+    Assignment 1
+*/
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
