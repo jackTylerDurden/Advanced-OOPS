@@ -52,5 +52,6 @@ public class TaskManagerTest{
         TaskManager.startProcess(proc12);        
         TaskManager.sortProcesses();
         assertEquals(16,TaskManager.processQueueCapacity);
+        assertEquals(11,TaskManager.liveProcessCount);        
     }
 }
