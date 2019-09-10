@@ -2,6 +2,7 @@ import java.util.Scanner;
 public class assignment1{
     static Integer processQueueCapacity = 2; //default capacity of task manager is set to 2.
     static Integer processCount = 0;
+    static Integer liveProcessCount = 0;
     static Scanner in = new Scanner(System.in);     
     /*Process Structure*/    
     static class Process{
@@ -34,58 +35,61 @@ public class assignment1{
         
     }
     public static void sortQueue(){  
-        enqueue(new Process(1));
         enqueue(new Process(2));
-        enqueue(new Process(3));
-        enqueue(new Process(4));
-        enqueue(new Process(5));
-        enqueue(new Process(6));   
-        dequeue();     
-        enqueue(new Process(7));   
-        enqueue(new Process(8));   
-        enqueue(new Process(9));   
-        enqueue(new Process(10));   
-        enqueue(new Process(11));
+        enqueue(new Process(1));        
+        // enqueue(new Process(3));
+        // enqueue(new Process(4));
+        // enqueue(new Process(5));
+        // enqueue(new Process(6));   
+        // dequeue();     
+        // enqueue(new Process(17));   
+        // enqueue(new Process(8));   
+        // enqueue(new Process(9));   
+        // // enqueue(new Process(10));   
+        // enqueue(new Process(11));
         // dequeue();   
         // dequeue();   
         // dequeue();   
         // dequeue();   
         // dequeue();   
-        dequeue();   
-        dequeue();
-        enqueue(new Process(12));
-        enqueue(new Process(13));   
-        enqueue(new Process(14));   
-        enqueue(new Process(15));   
-        enqueue(new Process(16));   
-        enqueue(new Process(17));   
-        enqueue(new Process(18));   
+        // dequeue();   
+        // dequeue();
+        // enqueue(new Process(12));
+        // enqueue(new Process(13));   
+        // enqueue(new Process(14));   
+        // enqueue(new Process(15));   
+        // enqueue(new Process(16));   
+        // enqueue(new Process(17));   
+        // enqueue(new Process(18));   
         // enqueue(new Process(19));   
-        System.out.println("processCOunt-------------->>>"+processCount);
-        System.out.println("processQueueCapacity-------------->>>"+processQueueCapacity);
-        System.out.println("rear-------->>"+rear.PID);
-        System.out.println("actualRear-------->>"+actualRear.PID);        
+        // enqueue(new Process(29));   
         printQueue();
-        // Process[] processList = new Process[processCount];
-        // int count = 0;
-        // Process currentProcess = front;                        
-        // do{
-        //     // if(currentProcess.isActive){    
-        //         if(count < processCount-1)                            
-        //             processList[count]=currentProcess;                 
-        //     // }
-        //     count++;
-        //     currentProcess = currentProcess.next;
-        // }while(currentProcess != front);                            
-        // // for(int i=0;i < processList.length;i++)
-        // //     System.out.println("before sorted------------>>>"+processList[i].PID);
-        // sort(processList,0,processList.length-1);
-        // System.out.println("Sorted------------>>>");
-        // for(int i=0;i < processList.length;i++)
-        //     System.out.println("Process ID -> "+processList[i].PID);
+        Process[] processList = new Process[liveProcessCount];
+        int count = 0;
+        Process currentProcess = front;                        
+        if(front == rear){ //only one process is in the queue.
+            processList[0] = front;
+        }else{
+            do{
+                if(currentProcess.isActive){                
+                    processList[count]=currentProcess;                 
+                    count++;
+                }            
+                currentProcess = currentProcess.next;
+            }while(currentProcess != front);     
+        }        
+
+        System.out.println("Before Sorting");
+        for(int i=0;i < processList.length;i++){            
+                System.out.println("Process ID -> "+processList[i].PID);
+        }            
+        sort(processList,0,processList.length-1);
+        System.out.println("Sorted------------>>>");
+        for(int i=0;i < processList.length;i++)            
+                System.out.println("Process ID -> "+processList[i].PID);
     }
 
-    private static void sort(Process[] processList, int leftIndex ,int rightIndex){
+    private static void sort(Process[] processList, int leftIndex ,int rightIndex){        
         if(leftIndex < rightIndex){
             int middle = (leftIndex + rightIndex) / 2;        
             sort(processList,leftIndex,middle);
@@ -140,6 +144,7 @@ public class assignment1{
     }
     private static void enqueue(Process procByUser){
         processCount++;
+        liveProcessCount++;
         if(front == null && rear == null){            
             procByUser.isActive = true;
             front = rear = actualRear = procByUser;            
@@ -155,45 +160,25 @@ public class assignment1{
                 proc.isActive = true;
                 rear.next = proc; //establishing next link
                 proc.prev = rear; //establishing previous link                
-                rear = proc;                
+                rear = rear.next;
                 rear.next = front; //establishing circular next link
                 front.prev = rear; //establishing circular prev link 
                 
                 //at each enqueue actualRear and Rear should point to same node.
                 actualRear.next = proc;
                 proc.prev = actualRear;
-                actualRear = proc;
+                actualRear = actualRear.next;
                 actualRear.next = front;
                 front.prev = actualRear;                                
-            }else{
-                if(proc.PID == front.PID){ // special case - e.g. Queue size is 4 and so is the capacity and if it's dequeued then queue size becaoms 3 and capacity still remains 4. And if we try to enqueue via rear, then rear.next will always be front as a result front will be overwritten because before dequeueing the queue was full. So we need to create a last node in tbis special case.
-                    // processCount++;
-                    System.out.println("Eureka------->>>>!!!");
-                    System.out.println("procByUser for eureka------->>>>!!!"+procByUser.PID);
-                    System.out.println("rear for eureka------->>>>!!!"+rear.PID);
-                    System.out.println("front for eureka------->>>>!!!"+front.PID);
-                    rear.next = procByUser;
-                    procByUser.prev = rear;                    
-                    rear = procByUser;
-                    rear.PID = procByUser.PID;
-                    // rear.next = front;
-                    // front.prev = rear;
-
-                    actualRear.next = procByUser;
-                    procByUser.prev = actualRear;                    
-                    actualRear = procByUser;
-                    actualRear.PID = procByUser.PID;
-                    actualRear.next = front;
-                    front.prev = actualRear;
-                }else{
-                    System.out.println("procByUser------------->>>"+procByUser.PID);                                  
-                    System.out.println("rear------------->>>"+rear.PID);                                  
-                    System.out.println("\n");                                                  
-                    rear = rear.next;
-                    // /rear = procByUser;
-                    rear.PID = procByUser.PID;
-                }                
-            }            
+            }else{                
+                System.out.println("procByUser------------->>>"+procByUser.PID);                                  
+                System.out.println("rear------------->>>"+rear.PID);                                  
+                System.out.println("\n");                                                  
+                rear = rear.next;                                    
+                rear.PID = procByUser.PID;
+                rear.isActive = true;                    
+            }                
+                        
         }        
     }
 
@@ -203,28 +188,28 @@ public class assignment1{
         Process firstProc = firstProcessAfterIncreasedCapacity;
         firstProc.isActive = true;
         rear.next = firstProc;
-        firstProc.prev = rear;        
-        rear = firstProc;                
+        firstProc.prev = rear;                
+        rear = rear.next;
         //at each enqueue actualRear and Rear should point to same node.        
         actualRear.next = firstProc;
         firstProc.prev = actualRear;
-        firstProc.next = front;
-        actualRear = firstProc;
+        firstProc.next = front;        
+        actualRear = actualRear.next;
         front.prev = actualRear;
 
         for(int i=0;i<(additionalCapacity-1);i++){                                    
             Process proc = new Process(0);
             proc.isActive = false;
             firstProc.next = proc;
-            proc.prev = firstProc;
-            firstProc = proc;
+            proc.prev = firstProc;            
+            firstProc = firstProc.next;
             firstProc.next = front;
             front.prev = firstProc;
             
             //to increase the capacity of the process queue empty nodes are queued into the queue and hence another pointer 'actualRear' is maintained to find actual rear point of the queue. Differnece between 'rear' and 'actualRear' is that 'rear' will always hold value entered by the user where 'actualRear' will be the actual rear of the queue which could be an user input or a dummy node.
             actualRear.next = proc;
-            proc.prev = actualRear;
-            actualRear = proc;
+            proc.prev = actualRear;            
+            actualRear = actualRear.next;
             actualRear.next = front;
             front.prev = actualRear;            
         }
@@ -235,7 +220,8 @@ public class assignment1{
             System.out.println("Process Queue is Empty from dequeue");
             return;
         }            
-        processCount--;                
+        // processCount--;                
+        liveProcessCount--;
         if(actualRear == front){
             front = actualRear=  rear = null;
         }else{
