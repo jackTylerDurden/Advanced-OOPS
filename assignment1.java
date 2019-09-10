@@ -1,8 +1,8 @@
 import java.util.Scanner;
 public class assignment1{
-    static Integer processQueueCapacity = 2; //default capacity of task manager is set to 2.
-    static Integer processCount = 0;
-    static Integer liveProcessCount = 0;
+    static int processQueueCapacity = 2; //default capacity of task manager is set to 2.
+    static int processCount = 0;
+    static int liveProcessCount = 0;
     static Scanner in = new Scanner(System.in);     
     /*Process Structure*/    
     static class Process{
@@ -11,19 +11,19 @@ public class assignment1{
         String name;
         String owner;        
         int noOfThreads;
-        float percentOfCPUCurrentlyUsed;
-        float totalCPUTimeUsed;
+        double percentOfCPUCurrentlyUsed;
+        double totalCPUTimeUsed;
         Process prev;
         Process next;
 
-        public Process(int PID){
+        public Process(int PID,boolean isActive, String name, String owner, int noOfThreads, double percentOfCPUCurrentlyUsed, double totalCPUTimeUsed){
             this.PID = PID;            
             this.isActive = true;
-            this.name = "test";
-            this.owner = "test";        
-            this.noOfThreads = 0;
-            this.percentOfCPUCurrentlyUsed = 0;
-            this.totalCPUTimeUsed = 0;            
+            this.name = name;
+            this.owner = owner;        
+            this.noOfThreads = noOfThreads;
+            this.percentOfCPUCurrentlyUsed = percentOfCPUCurrentlyUsed;
+            this.totalCPUTimeUsed = totalCPUTimeUsed;            
         }
     }
     static Process front = null;
@@ -35,34 +35,8 @@ public class assignment1{
         
     }
     public static void sortQueue(){  
-        enqueue(new Process(2));
-        enqueue(new Process(1));        
-        // enqueue(new Process(3));
-        // enqueue(new Process(4));
-        // enqueue(new Process(5));
-        // enqueue(new Process(6));   
-        // dequeue();     
-        // enqueue(new Process(17));   
-        // enqueue(new Process(8));   
-        // enqueue(new Process(9));   
-        // // enqueue(new Process(10));   
-        // enqueue(new Process(11));
-        // dequeue();   
-        // dequeue();   
-        // dequeue();   
-        // dequeue();   
-        // dequeue();   
-        // dequeue();   
-        // dequeue();
-        // enqueue(new Process(12));
-        // enqueue(new Process(13));   
-        // enqueue(new Process(14));   
-        // enqueue(new Process(15));   
-        // enqueue(new Process(16));   
-        // enqueue(new Process(17));   
-        // enqueue(new Process(18));   
-        // enqueue(new Process(19));   
-        // enqueue(new Process(29));   
+        enqueue(new Process(2,true,"Adobe","tanmay_linux",4,10.1,12.1));
+        enqueue(new Process(1,true,"Compiz","tanmay_linux",3,12.5,23.4));
         printQueue();
         Process[] processList = new Process[liveProcessCount];
         int count = 0;
@@ -81,12 +55,25 @@ public class assignment1{
 
         System.out.println("Before Sorting");
         for(int i=0;i < processList.length;i++){            
-                System.out.println("Process ID -> "+processList[i].PID);
+            System.out.println("Process ID -> "+processList[i].PID);
+            System.out.println("Process Name -> "+processList[i].name);
+            System.out.println("Process Owner -> "+processList[i].owner);
+            System.out.println("No. Of Threads -> "+processList[i].noOfThreads);
+            System.out.println("Percent Of CPU currently used -> "+processList[i].percentOfCPUCurrentlyUsed);
+            System.out.println("Total CPU Time Used -> "+processList[i].totalCPUTimeUsed);
+            System.out.println("\n");
         }            
         sort(processList,0,processList.length-1);
         System.out.println("Sorted------------>>>");
-        for(int i=0;i < processList.length;i++)            
-                System.out.println("Process ID -> "+processList[i].PID);
+        for(int i=0;i < processList.length;i++){
+            System.out.println("Process ID -> "+processList[i].PID);
+            System.out.println("Process Name -> "+processList[i].name);
+            System.out.println("Process Owner -> "+processList[i].owner);
+            System.out.println("No. Of Threads -> "+processList[i].noOfThreads);
+            System.out.println("Percent Of CPU currently used -> "+processList[i].percentOfCPUCurrentlyUsed);
+            System.out.println("Total CPU Time Used -> "+processList[i].totalCPUTimeUsed);
+            System.out.println("\n");
+        }
     }
 
     private static void sort(Process[] processList, int leftIndex ,int rightIndex){        
@@ -134,14 +121,7 @@ public class assignment1{
             indexOfMergedArray++;
         }
 
-    }
-    private static void createProcess(){
-        Process userCreatedProcess = new Process(0);
-        userCreatedProcess.isActive = true;        
-        System.out.println("Please enter process Id : ");        
-        userCreatedProcess.PID = in.nextInt();        
-        enqueue(userCreatedProcess);
-    }
+    }    
     private static void enqueue(Process procByUser){
         processCount++;
         liveProcessCount++;
@@ -171,15 +151,23 @@ public class assignment1{
                 actualRear.next = front;
                 front.prev = actualRear;                                
             }else{                
-                System.out.println("procByUser------------->>>"+procByUser.PID);                                  
-                System.out.println("rear------------->>>"+rear.PID);                                  
                 System.out.println("\n");                                                  
                 rear = rear.next;                                    
-                rear.PID = procByUser.PID;
-                rear.isActive = true;                    
+                updateProcess(rear,procByUser);
+                // rear.PID = procByUser.PID;
+                // rear.isActive = true;                    
             }                
                         
         }        
+    }
+
+    static void updateProcess(Process destination, Process src){
+        destination.PID = src.PID;
+        destination.noOfThreads = src.noOfThreads;
+        destination.name = src.name;
+        destination.owner = src.owner;
+        destination.percentOfCPUCurrentlyUsed = src.percentOfCPUCurrentlyUsed;
+        destination.isActive = src.isActive;
     }
 
     private static void increaseCapacity(int factor,Process firstProcessAfterIncreasedCapacity){
@@ -198,7 +186,7 @@ public class assignment1{
         front.prev = actualRear;
 
         for(int i=0;i<(additionalCapacity-1);i++){                                    
-            Process proc = new Process(0);
+            Process proc = new Process(0,false,"","",0,0.0,0.0);
             proc.isActive = false;
             firstProc.next = proc;
             proc.prev = firstProc;            
@@ -241,13 +229,9 @@ public class assignment1{
             System.out.println("1. Process ID -> "+currentProcess.PID);            
             return;
         }
-        // System.out.println("actual Process ID -> "+actualRear.PID);            
-        // System.out.println(" rear Process ID -> "+rear.PID);            
-        do{                                    
-            // if(currentProcess.isActive){                                
-                System.out.println("Process ID -> "+currentProcess.PID);
-                System.out.print("\n");                
-            // }                        
+        do{                                                
+            System.out.println("Process ID -> "+currentProcess.PID);
+            System.out.print("\n");                            
             currentProcess = currentProcess.next;            
         }while(currentProcess != front);         
     }
