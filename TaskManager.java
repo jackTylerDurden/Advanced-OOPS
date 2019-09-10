@@ -45,7 +45,7 @@ public class TaskManager{
             System.out.println("\n");
         }            
         sort(processList,0,processList.length-1);
-        System.out.println("Sorted------------>>>");
+        System.out.println("After Sorting------------>>>");
         for(int i=0;i < processList.length;i++){
             System.out.println("Process ID -> "+processList[i].PID);
             System.out.println("Process Name -> "+processList[i].name);
@@ -134,9 +134,7 @@ public class TaskManager{
             }else{                
                 System.out.println("\n");                                                  
                 rear = rear.next;                                    
-                updateProcess(rear,procByUser);
-                // rear.PID = procByUser.PID;
-                // rear.isActive = true;                    
+                updateProcess(rear,procByUser)                
             }                
                         
         }        
